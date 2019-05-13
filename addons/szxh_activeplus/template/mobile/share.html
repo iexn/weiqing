@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{$active['title']}</title>
+    <link rel="stylesheet" href="{WEB_RESOURCE}/weui/dist/style/weui.min.css">
+    <link rel="stylesheet" href="{WEB_RESOURCE}/main.css">
+    <link rel="stylesheet" href="{WEB_RESOURCE}/frame.css">
+    <script type="text/javascript" src="./resource/js/lib/jquery-1.11.1.min.js"></script>
+    <style>
+        html, body{height:100%;text-align:center}
+        .media-shareimg{margin:20px;}
+    </style>
+</head>
+<body>
+    <div class="modal-header">长按图片分享给好友</div>
+    <img src="{php echo purl('createdesign', ['pid'=>$active_id, 'oid'=>$oid, 'rand'=>$rand])}" class="media-shareimg">
+    <div class="modal-footer"><a href="javascript:history.back();" class="modal-close">返回活动</a></div>
+</body>
+</html>

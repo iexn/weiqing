@@ -1,0 +1,41 @@
+{template 'common/header'}
+
+<style>
+    .szxh-line{margin-top: 15px}
+    .szxh-title{width:200px;display: inline-block;text-align: right;padding-top: 5px}
+    .szxh-setting{padding-left:15px;display: inline-block;width: 72%;vertical-align: top}
+</style>
+
+<form action="">
+    <div class="szxh-line"><span class="szxh-title">日期控件：</span><span class="szxh-setting">{php echo _tpl_form_field_date('date')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">系统链接：</span><span class="szxh-setting">{php echo tpl_form_field_link('link')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">模块链接：</span><span class="szxh-setting">{php echo tpl_form_module_link('mod')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">Emoji表情：</span><span class="szxh-setting">{php echo tpl_form_field_emoji('emoji')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">拾色器：</span><span class="szxh-setting">{php echo tpl_form_field_color('color')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">系统图标：</span><span class="szxh-setting">{php echo tpl_form_field_icon('icon')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">图片上传与选择控件：</span><span class="szxh-setting">{php echo tpl_form_field_image('upload')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">批量上传图片：</span><span class="szxh-setting">{php echo tpl_form_field_multi_image('uploads')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">音乐选择与上传：</span><span class="szxh-setting">{php echo tpl_form_field_audio('audio')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">批量上传音频：</span><span class="szxh-setting">{php echo tpl_form_field_multi_audio('audios')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">视频选择与上传：</span><span class="szxh-setting">{php echo tpl_form_field_video('video')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">微信图片上传与选择控件：</span><span class="szxh-setting">{php echo tpl_form_field_wechat_image('wimage')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">微信批量上传图片：</span><span class="szxh-setting">{php echo tpl_form_field_wechat_multi_image('wimages')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">微信语音选择与上传：</span><span class="szxh-setting">{php echo tpl_form_field_wechat_voice('wvoice')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">微信视频选择与上传：</span><span class="szxh-setting">{php echo tpl_form_field_wechat_video('wvideo')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">微信门店类目选择三级联动：</span><span class="szxh-setting">{php echo tpl_form_field_location_category('wlocal')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">富文本编辑器：</span><span class="szxh-setting">{php echo tpl_ueditor('ueditor')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">短信条数编辑器：</span><span class="szxh-setting">{php echo tpl_edit_sms('sms')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">微信卡券拾色器：</span><span class="szxh-setting">{php echo tpl_coupon_colors('ccolor')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">时钟：</span><span class="szxh-setting">{php echo tpl_form_field_clock('clock')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">范围日期：</span><span class="szxh-setting">{php echo tpl_form_field_daterange('daterange')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">出生日期控件：</span><span class="szxh-setting">{php echo tpl_form_field_calendar('calendar')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">省市县(区)地区：</span><span class="szxh-setting">{php echo tpl_form_field_district('district')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">二级分类：</span><span class="szxh-setting">{php echo tpl_form_field_category_2level('2level')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">行业分类：</span><span class="szxh-setting">{php echo tpl_form_field_industry('industry')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">地理位置：</span><span class="szxh-setting">{php echo tpl_form_field_coordinate('coor')}</span></div>
+    <div class="szxh-line"><span class="szxh-title">系统预设表单：</span><span class="szxh-setting">{php echo tpl_fans_form('form')}</span></div>
+    <div class="szxh-line"><span class="szxh-title"></span><span class="szxh-setting"><button class="btn">submit</button></span></div>
+
+</form>
+
+{template 'common/footer'}

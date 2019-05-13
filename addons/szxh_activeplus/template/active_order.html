@@ -1,0 +1,118 @@
+{template 'common/header'}
+{template 'base/css'}
+<style>
+    td{vertical-align: middle!important}
+    .btn-group{margin-bottom:15px;}
+</style>
+<h3>{$row['title']}</h3>
+<br>
+<div class="btn-group" role="group" aria-label="...">
+    <a href="#" class="btn btn-default check-all-control">全选</a>
+    {if $_W['role'] != 'clerk'}
+    <a href="{php echo aurl(8)}" class="btn btn-default ajax-post confirm" data-confirm="确定要删除勾选项吗?">删除</a>
+    {/if}
+    <a href="{php echo aurl(['et'=>14, 'pid'=>$row['id']])}" class="btn btn-default">导出订单</a>
+</div>
+<form action="javascript:void(0)" method="POST" id="form">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <td>#</td>
+        <td>订单号</td>
+        <td>金额</td>
+        <td>微信昵称</td>
+        <td>真实姓名</td>
+        <td>类型</td>
+        <td>属性</td>
+        <td>手机号</td>
+        <td>推荐人昵称</td>
+        <td>支付状态</td>
+        <td>购买时间</td>
+      	<td>红包发放</td>
+        <td>发放状态</td>
+    </tr>
+    </thead>
+    <tbody>
+    {loop $orderList $index $item}
+    {php $user = userinfo($item['wechat_id'])}
+    {php $ref = userinfo($item['referrals_wechat_id'])}
+    <tr>
+        <td><input type="checkbox" name="id[]" class="check-all" value="{$item['id']}"></td>
+        <td>{$item['order_sn']}</td>
+        <td>￥{$item['price']}</td>
+        <td>{$user['nickname']}</td>
+        <td>{$item['name']}</td>
+        <td>{php echo order_user_type($item['type'])}</td>
+        <td>
+            <select class="change_princ" data-wechatid="{$user['openid']}" data-name="{$user['nickname']}">
+                <option value="1">普通成员&ensp;</option>
+                <option value="2" {if $row['princ'] == $user['openid']}selected="selected"{/if}>校长&ensp;</option>
+            </select>
+        </td>
+        <td>{$item['mobile']}</td>
+        {if $item['referrals_wechat_id'] == ''}
+        <td>---</td>
+        {else}
+        <td>{$ref['nickname']}</td>
+        {/if}
+        <td>{php echo payName($item['status'])}</td>
+        <td>{php echo date('Y-m-d H:i:s', $item['create_time'])}</td>
+       {if $item['referrals_wechat_id'] == '' || $item['type'] == 3}
+        <td>---</td>
+        <td>---</td>
+        {else}
+        <td>￥{$item['referrals_reward']}</td>
+        <td class="td{$item['order_sn']}">{php echo rewardsn($item['referrals_reward_status'])}</td>
+        {/if}
+    </tr>
+    {/loop}
+    </tbody>
+</table>
+</form>
+{$page}
+{template 'base/js'}
+
+<script>
+$(function() {
+    $('.resendreward').on('click', function() {
+        var _this = this;
+        var order_sn = $(this).data('ordersn');
+        if(!confirm('确定要补发该订单的红包奖励吗？')) {
+            return false;
+        }
+        post('{php echo aurl(9)}', {
+            order_sn: order_sn
+        }, function() {
+            $('.td'+order_sn).html('{php echo rewardsn(1)}');
+        });
+    });
+});
+
+$(function() {
+    $('.change_princ').on('change', function() {
+        var name = $(this).data('name');
+        if($(this).val() == 2) {
+            if(!confirm("确认指定\n\n "+name+" \n\n为此活动的校长吗？\n\n指定之后，当有用户参与活动，"+name+"会收到活动指定的红包奖励。")) {
+                $(this).val(1);
+                return false;
+            }
+        } else if(!confirm("确认取消\n\n "+name+" \n\n的校长身份吗？\n\n取消之后将不会收到报名红包。")) {
+            $(this).val(2);
+            return false;
+        }
+        post('{php echo aurl(15)}', {
+            wechat_id: $(this).data('wechatid'),
+            type: $(this).val(),
+            active_id: "{$row['id']}"
+        }, function() {
+            xalert("指定了"+name+"为校长。");
+            setTimeout(function() {
+                location.reload();
+            }, 500);
+        });
+        return false;
+    });
+});
+</script>
+
+{template 'common/footer'}

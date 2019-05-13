@@ -1,0 +1,90 @@
+{template 'common/header'}
+{template 'base/css'}
+<form action="{php echo aurl(5)}" id="form" method="post" enctype="multipart/form-data">
+    <input name="token" type="hidden" value="{$_W['token']}" />
+    <input type="hidden" name="id" value="{$row['id']}">
+    <div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#base" aria-controls="base" role="tab" data-toggle="tab">基本信息</a></li>
+        </ul>
+    
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="base">
+
+                <div class="szxh-line">
+                    <span class="szxh-title">姓名：</span>
+                    <span class="szxh-setting">
+                        <input type="text" class="form-control" name="name" value="{$row['name']}">
+                        <p class="help-block">* 类别中文名称，20字符内</p>
+                    </span>
+                </div>
+
+                <div class="szxh-line">
+                    <span class="szxh-title">绑定操作员：</span>
+                    <span class="szxh-setting">
+                        <select name="uid" id="uid">
+                            <option value="">请选择操作员&emsp;</option>
+                            {loop $clerks $clerk}
+                            <option value="{$clerk['user_info']['uid']}" {if $row['uid'] == $clerk['user_info']['uid']}selected="selected"{/if}>{$clerk['user_info']['username']}</option>
+                            {/loop}
+                        </select>
+                    </span>
+                </div>
+
+                <div class="szxh-line">
+                    <span class="szxh-title">头像：</span>
+                    <span class="szxh-setting">
+                        {php echo tpl_form_field_image('avatar', $row['avatar'])}
+                    </span>
+                </div>
+                
+                <div class="szxh-line">
+                    <span class="szxh-title">手机号：</span>
+                    <span class="szxh-setting">
+                        <input type="text" class="form-control" name="mobile" value="{$row['mobile']}">
+                    </span>
+                </div>
+
+                <div class="szxh-line">
+                    <span class="szxh-title">微信二维码：</span>
+                    <span class="szxh-setting">
+                        {php echo tpl_form_field_image('wechat_qrcode', $row['wechat_qrcode'])}
+                    </span>
+                </div>
+    
+                <div class="szxh-line">
+                    <span class="szxh-title">排序数字：</span>
+                    <span class="szxh-setting">
+                        <input type="text" class="form-control text-width-small" name="sort" value="{if !empty($row)}{$row['sort']}{else}0{/if}">
+                        <p class="help-block">* 数字，越小越向前</p>
+                    </span>
+                </div>
+    
+            </div>
+        </div>
+        <div class="szxh-line"><span class="szxh-title"></span><span class="szxh-setting"><button type="submit" name="submit" class="btn btn-info">提交保存</button></span></div>
+    
+    </div>
+    
+
+</form>
+{template 'base/js'}
+<script>
+    $('#form').on('submit', function(e) {
+        
+        var data = $(this).serialize();
+
+        post('{php echo aurl(5)}', data, function() {
+            setTimeout(function() {
+                location.href = "{php echo aurl(1)}";
+            }, 2000);
+        });
+
+        return false;
+    })
+</script>
+
+{template 'common/footer'}

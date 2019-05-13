@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="">
+	
+	<application setting='false'>
+		<name><![CDATA[红包拓客裂变活动]]></name>
+
+		<identifie><![CDATA[szxh_activeplus]]></identifie>
+
+		<version><![CDATA[1.3.6]]></version>
+
+		<ability><![CDATA[红包拓客裂变活动]]></ability>
+
+		<type><![CDATA[activity]]></type>
+
+		<description><![CDATA[这是一个即能裂变又能赚钱的客源系统！
+参与活动的朋友，生成一张推广海报，再把海报分享出去,如果有人报名,你就得红包,人数不限,你分享的越多,红包收益越多。
+举个粟子:
+如果是某艺术培训学校或是跆拳道社的报名活动，线上报名费39.98元，可以免费一学期1200元的特长班。你红包设置10-20%，链接分享出去，有人报名付费成功，你就得10-20元的红包，报名的越多，你获利越多。
+如果分享曝光100次，有10人参与报名，你就得100-200元的红包，没有上线。]]></description>
+
+		<author><![CDATA[三只小猴拓客]]></author>
+
+		<url><![CDATA[]]></url>
+
+		<setting><![CDATA[]]></setting>
+
+	</application>
+
+	
+	<platform>
+		<rule embed="false" />
+
+		<rule embed="false" />
+
+	<supports>
+
+			<item type="app" />
+	</supports>
+
+	</platform>
+
+	
+	<bindings>
+
+		<menu>
+			<entry title="活动管理" do="active" state="et=1" direct="" />
+			<entry title="添加活动" do="activeAdd" state="et=1" direct="" />
+			<entry title="活动分类管理" do="activeCate" state="et=1" direct="" />
+			<entry title="客服管理" do="serviceUser" state="et=1" direct="" />
+			<entry title="模块设置" do="config" state="et=1" direct="" />
+		</menu>
+
+	</bindings>
+
+	<install><![CDATA[install.php]]></install>
+	<uninstall><![CDATA[]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

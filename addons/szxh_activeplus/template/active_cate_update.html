@@ -1,0 +1,56 @@
+{template 'common/header'}
+{template 'base/css'}
+
+<form action="{php echo aurl(5)}" id="form" method="post" enctype="multipart/form-data">
+    <input name="token" type="hidden" value="{$_W['token']}" />
+    <input type="hidden" name="id" value="{$row['id']}">
+    <div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#base" aria-controls="base" role="tab" data-toggle="tab">基本信息</a></li>
+        </ul>
+    
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="base">
+    
+                <div class="szxh-line">
+                    <span class="szxh-title">排序数字：</span>
+                    <span class="szxh-setting">
+                        <input type="text" class="form-control text-width-small" name="sort" value="{if !empty($row)}{$row['sort']}{else}0{/if}">
+                        <p class="help-block">* 数字，越小越向前</p>
+                    </span>
+                </div>
+
+                <div class="szxh-line">
+                    <span class="szxh-title">类别名称：</span>
+                    <span class="szxh-setting">
+                        <input type="text" class="form-control" name="title" value="{$row['title']}">
+                        <p class="help-block">* 类别中文名称，100字符内</p>
+                    </span>
+                </div>
+    
+            </div>
+        </div>
+        <div class="szxh-line"><span class="szxh-title"></span><span class="szxh-setting"><button type="submit" name="submit" class="btn btn-info">提交保存</button></span></div>
+    
+    </div>
+    
+
+</form>
+{template 'base/js'}
+<script>
+    $('#form').on('submit', function(e) {
+        
+        var data = $(this).serialize();
+
+        post('{php echo aurl(5)}', data, function() {
+            location.href = "{php echo aurl(1)}";
+        });
+
+        return false;
+    })
+</script>
+
+{template 'common/footer'}

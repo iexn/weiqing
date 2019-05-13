@@ -1,0 +1,57 @@
+{template 'common/header'}
+
+{template 'base/css'}
+<style>
+    td{vertical-align: middle!important}
+    .btn-group{margin-bottom:15px;}
+</style>
+
+<div class="btn-group" role="group" aria-label="...">
+    <a href="{php echo aurl(2)}" class="btn btn-default">新增</a>
+    <a href="{php echo aurl(3)}" class="btn btn-default ajax-post">保存</a>
+    <a href="#" class="btn btn-default check-all-control">全选</a>
+    <a href="{php echo aurl(4)}" class="btn btn-default ajax-post confirm" data-confirm="确定要删除勾选项吗?">删除</a>
+    <a href="{$export_url}" class="btn btn-default">导出数据</a>
+    
+    <form class="table-top-search form-inline" id="form_search" method="GET" action="{$url}">
+        <label class="btn-group">
+            {php $time = is_time(1); $time['start'] = date('Y-m-d 00:00:00', $time['start']); $time['end'] = date('Y-m-d 00:00:00', $time['end'])}
+            {php echo tpl_form_field_daterange('searchtime', ['start'=>$_GET['searchtime']['start'] ?: $time['start'], 'end'=>$_GET['searchtime']['end'] ?: $time['end']])}
+            <button class="btn btn-default">查询</button>
+        </label>
+    </form>
+</div>
+<form action="javascript:void(0)" method="POST" id="form">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <td>#</td>
+        <td>编号</td>
+        <td>头像</td>
+        <td>姓名</td>
+        <td>电话</td>
+        <td>新/老/总</td>
+        <td>排序</td>
+        <td>操作</td>
+    </tr>
+    </thead>
+    <tbody>
+    {loop $list $index $item}
+    <tr>
+        <td><input type="checkbox" name="id[]" class="check-all" value="{$item['id']}"></td>
+        <td>{$item['id']}</td>
+        <td><img src="{media $item['avatar']}" width="60"></td>
+        <td>{$item['name']}</td>
+        <td>{$item['mobile']}</td>
+        <td>{$item['new']} / {$item['old']} / {$item['all']}</td>
+        <td><input type="text" class="form-control text-width-small" name="sort[{$item['id']}]" value="{$item['sort']}"></td>
+        <td><a href="{php echo aurl(['et'=>2, 'pid'=>$item['id']])}">修改</a></td>
+    </tr>
+    {/loop}
+    </tbody>
+</table>
+    {$page}
+</form>
+
+{template 'base/js'}
+{template 'common/footer'}

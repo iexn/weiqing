@@ -1,0 +1,133 @@
+{template 'common/header'}
+{template 'base/css'}
+<style>
+    td{vertical-align: middle!important}
+    .btn-group{margin-bottom:15px;}
+</style>
+
+<div class="btn-group" role="group" aria-label="...">
+    <a href="{php echo aurl(2)}" class="btn btn-default">新增</a>
+    <a href="#" class="btn btn-default check-all-control">全选</a>
+    <a href="{php echo aurl(4)}" class="btn btn-default ajax-post confirm" data-confirm="确定要删除勾选项吗?">删除</a>
+</div>
+<form action="javascript:void(0)" id="form_search" class="form-inline" style="float: right" method="GET" data-search-ignore="page">
+    <input type="text" name="active_id" class="form-control" value="{$_GET['active_id']}" placeholder="搜索编号">
+    <input type="text" name="title" class="form-control" value="{$_GET['title']}" placeholder="搜索标题">
+{if $_W['role'] != 'clerk'}
+    <select name="uid">
+        <option value="">关联客服&emsp;</option>
+        {loop $services $service}
+            <option value="{$service['id']}" {if $_GET['uid'] == $service['id']}selected="selected"{/if}>{$service['name']}</option>
+        {/loop}
+    </select>
+    <button class="btn btn-default">搜索</button>
+{/if}
+</form>
+<form action="javascript:void(0)" method="POST" id="form">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <td>#</td>
+        <td>编号</td>
+        <td>标题</td>
+        <td>所属分类</td>
+        <td>价格</td>
+        <td>关联客服</td>
+        <td>浏览数</td>
+        <td>新/老/总</td>
+        <td>到期时间</td>
+        <td>状态</td>
+        <td>操作</td>
+    </tr>
+    </thead>
+    <tbody>
+    {loop $list $index $item}
+    <tr>
+        <td><input type="checkbox" name="id[]" class="check-all" value="{$item['id']}"></td>
+        <td>{$item['id']}</td>
+        <td>{$item['title']}</td>
+        <td>{$item['active_cate_title']}</td>
+        <td>￥{$item['price']}</td>
+        <td data-planner="{$item['service_user_id']}">{$item['service_user_name']}</td>
+        <td>{$item['views']}</td>
+        <td>{$item['new']} / {$item['old']} / {$item['all']}</td>
+        <td>{php echo date('Y-m-d H:i:s', $item['end_time'])}</td>
+        <td>{php echo statusName($item['status'])}</td>
+        <td>
+            <label><a href="{php echo aurl(['et'=>6, 'pid'=>$item['id']])}">订单</a></label>
+            <label><a class="modal-control" href="javascript:;" data-title="{$item['title']}" data-img="{php echo aurl(['et'=>10,'pid'=>$item['id']])}" data-link="{php echo web2app_url('main', ['pid'=>$item['id']])}" style="cursor:pointer">预览</a></label>
+            <label class="dropdown">
+                <a id="dLabel" data-target="#" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多<span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li><a href="{php echo aurl(['et'=>2, 'pid'=>$item['id']])}">修改</a></li>
+                    <li><a href="{php echo aurl(2, ['copyid'=>$item['id']])}">复制活动</a></li>
+                    <li><a href="{php echo aurl(16, ['pid'=>$item['id']])}">校长返利</a></li>
+                </ul>
+            </label>
+        </td>
+    </tr>
+    {/loop}
+    </tbody>
+</table>
+{$page}
+</form>
+<div class="modal fade bs-example-modal-sm" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{$item['title']}</h4>
+            </div>
+            <div class="modal-body">
+                <p align="center"><img src="{php echo aurl(['et'=>10,'pid'=>$item['id']])}" id="qrcodeLabel" width="200"></p>
+                <p class="help-block">* 请使用微信扫描二维码查看活动或 <a href="javascript:;" class="cliplink" data-text="{php echo web2app_url('main', ['pid'=>$item['id']])}" style="color:dodgerblue"><strong><u>复制活动链接</u></strong></a></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭页面</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{template 'base/js'}
+<script>
+    requirejs.config({
+        appDir: '.',
+        paths: {
+            'clipboard': ['{WEB_RESOURCE}/library/clipboard.min']
+        }
+    });
+    require(['jquery', 'clipboard'], function($, Clipboard) {
+
+        $('.modal-control').on('click', function() {
+            var data = $(this).data();
+            $('#modal').find('.modal-title').html(data.title);
+            $('#modal').find('#qrcodeLabel').prop('src', data.img);
+            $('#modal').find('.cliplink').attr('data-text', data.link);
+            $('#modal').modal('show');
+        })
+
+        $('#modal').on('hidden.bs.modal', function () {
+            $('#modal').find('.modal-title').html('');
+            $('#modal').find('#qrcodeLabel').prop('src', '');
+            $('#modal').find('.cliplink').attr('data-text', '');
+        });
+
+        var clipboard = new Clipboard('.cliplink', {
+            container: document.getElementById('modal'),
+            text: function(e) {
+                return $(e).attr('data-text');
+            }
+        });
+
+        clipboard.on('success', function(e) {
+            xalert('复制成功', true, true);
+        });
+        clipboard.on('error', function() {
+            xalert('复制失败', false, true);
+        });
+    });
+
+</script>
+
+{template 'common/footer'}

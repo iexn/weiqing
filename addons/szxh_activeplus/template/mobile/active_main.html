@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{$row['title']}</title>
+    <link rel="stylesheet" href="{WEB_RESOURCE}/weui/dist/style/weui.min.css">
+    <link rel="stylesheet" href="{WEB_RESOURCE}/main.css">
+    <link rel="stylesheet" href="{WEB_RESOURCE}/frame.css">
+    <script src="{WEB_RESOURCE}/require.min.js"></script>
+    <script>
+        require.config({
+            baseUrl: '{WEB_RESOURCE}',
+            paths: {
+                'weui': 'weui.js/dist/weui.min',
+                'jquery': 'library/jquery.min',
+                'mui': '{SYSTEM_RESOURCE}/js/lib/mui.min',
+                'util': '{SYSTEM_RESOURCE}/js/app/util',
+                'marque': 'library/marque',
+                'frame': 'frame.require',
+                'lazyload': 'library/lazyload.min'
+            },
+            shim: {
+                'util': {deps:['jquery']},
+                'marque': {deps:['jquery']},
+                'frame': {deps:['jquery']},
+                'lazyload': {deps:['jquery']}
+            }
+        });
+    </script>
+
+    <style id="dshow_style">
+        body{position:fixed;width:100%}
+        #body{visibility:hidden;opacity:0;transition:linear .4s}
+    </style>
+</head>
+<body>
+    <img src="{media $row['cover']}" style="display:none">
+    <div id="body">
+        <div><img src="{WEB_RESOURCE}/images/default.png" data-original="{media $row['cover']}" width="100%"></div>
+
+        <div id="detail">
+            <p><span>参与人数：{php echo robot($viewers_all, 'view', $row['id'], 'count')}</span>&emsp;<span>浏览人数：{php echo robot($row['views'], 'view', $row['id'], 'count2')}</span></p>
+            {if $time < 0}
+            <p id="countdown_title" style="font-weight: bold;color:tomato">活动已结束</p>
+            {else}
+            <p id="countdown_title" style="font-weight: bold">活动倒计时</p>
+            <p id="countdown"><span class="viewtime-day"></span>天<span class="viewtime-hour"></span>时<span class="viewtime-minute"></span>分<span class="viewtime-second"></span>秒</p>
+            {/if}
+        </div>
+        
+        <ul id="viewers">
+            {loop $viewers $index $viewer}
+            <li class="viewer"><p><img src="{WEB_RESOURCE}/images/default.png" data-original="{$viewer['avatar']}" class="viewer-avatar"></p><p class="of-h"><span class="ws-n">{$viewer['name']}</span></p></li>
+            {if $index == 26}
+            <li class="viewer"><p><div style="width:41px;height:41px;border-radius:50%;line-height:28px;color:#666;font-size:22px;">...</div></p><p class="of-h"><span class="ws-n"></span></p></li>
+            {/if}
+            {/loop}
+            <b></b>
+        </ul>
+        
+        {if $row['buyer_show_number'] > 0}
+        <div id="register">
+            <div class="title">购买记录<span class="title-normal">人数：{php echo robot($row['register'], 'order', $row['id'], 'count')}</span>
+            {if $row['princ'] == userinfo()['openid']}
+            <a href="{php echo ref(web2app_url('outputexcel', ['enpid'=>encry($row['id'])]), 'download')}" style="float:right;margin-right:15px;font-weight:normal;font-size:12px;padding-top:5px">[导出到excel]</a>
+            {/if}
+            </div>
+            <div id="reg-box" style="height:{php echo count($regs) == 0 ? 180 : ($row['buyer_show_number'] * 90)}px">
+            <ul id="regs">
+            {loop $regs $reg}
+                {php $user = userinfo($reg['wechat_id'])}
+                <li>
+                    <div class="regs-avatar"><img src="{WEB_RESOURCE}/images/default.png" data-original="{php echo $user['avatar'] ?: $reg['avatar']}" width="80"></div>
+                    <div class="regs-txt">
+                        <p class="regs-name nw">{php echo $user['nickname'] ?: $reg['nickname']}</p>
+                        <p class="regs-time nw">{php echo date('Y/m/d H:i', $reg['create_time'])}</p>
+                    </div>
+                    <div class="regs-price nw">
+                        已支付￥{$reg['price']}
+                    </div>
+                </li>
+            {/loop}
+            {if empty($regs)}
+                <p class="reg-none">暂无记录</p>
+            {/if}
+            </ul>
+            </div>
+        </div>
+        {/if}
+        {if $row['redpack_show_number'] > 0 && !empty($ranks)}
+        <div id="ranking">
+            <div class="title">红包排行榜</div>
+            <ul id="ranks">
+                {php $index = 0}
+                {loop $ranks $key $rank}
+                {php $index += 1}
+                <li>
+                    <div class="ranks-top font-bold {if $index <= 3}color-red fz18{/if}">{$index}</div>
+                    <div class="ranks-avatar"><img src="{WEB_RESOURCE}/images/default.png" data-original="{media $rank['avatar']}"></div>
+                    <div class="ranks-txt">
+                        <p class="ranks-name nw">{$rank['username']}</p>
+                        <p class="ranks-time color-red nw">已获得红包&ensp;<span class="font-bold">{$rank['rewards']}</span>&ensp;元</p>
+                    </div>
+                </li>
+                {/loop}
+                {if $ranks_count > $row['redpack_show_number']}
+                <li class="ranks-intro">
+                    还有{php echo $ranks_count - $row['redpack_show_number']}人领取了红包，快来参与吧~
+                </li>
+                {/if}
+            </ul>
+        </div>
+        {/if}
+
+        <div id="content">
+            <div class="title">活动详细介绍</div>
+            <div class="text">{$row['content']}</div>
+        </div>
+
+        {if $row['attract_status'] == 1}
+            {if $row['attract_type'] == 2}
+            <a href="{$row['attract_value_link']}" id="create" id="showIOSActionSheet">{$row['attract_title']}</a>
+            {else}
+            <a href="{php echo purl('attract', array('pid'=>$row['id']))}" id="create" id="showIOSActionSheet">{$row['attract_title']}</a>
+            {/if}
+        {/if}
+       
+        {if $time < 0}
+        <div class="list-item">
+            {if $buyed && $row['is_cav'] == 2} 
+                <a href="javascript:;" id="showimgmodal2" class="buy">查看我的二维码</a>
+            {else}
+                <a href="javascript:void(0)" class="buy">活动已结束</a>
+            {/if} 
+        </div>
+        {elseif $buyed}
+        <div class="list-item">
+            {if $row['design_status'] == 2}
+                <a href="javascript:;" id="showimgmodal" class="buy">马上赚钱</a>
+                {if $row['is_cav'] == 2}
+                     <a href="javascript:;" id="showimgmodal2" class="buy">查看我的二维码</a>
+                {/if}
+            {elseif $row['is_cav'] == 2}
+                <a href="javascript:;" id="showimgmodal2" class="buy">查看我的二维码</a>
+            {else}
+                <a href="javascript:void(0)" class="buy">已参加当前活动</a>    
+            {/if}
+        </div>
+        {else}
+        <div class="list-item">
+            {if empty($order)}
+            <a href="javascript:void(0)" id="buy" class="buy">立即抢购</a>
+            {else}
+            <a href="javascript:void(0)" id="buy" class="buy">立即支付</a>
+                {if $row['design_status'] == 2}
+                <a href="javascript:;" id="showimgmodal" class="buy">马上赚钱</a>
+                {/if}
+            {/if}
+        </div>
+        {/if}
+
+        {if !empty($row['service_tel'])}
+        <div id="phone"><img src="{WEB_RESOURCE}/icon/phone.svg" class="icon"><span onclick="location.href='tel:{$row['service_tel']}'">联系商家</span></div>
+        {/if}
+
+        {if !empty($row['bgm'])}
+        <div id="music"><img src="{WEB_RESOURCE}/icon/toggle.svg" class="icon"><span>关闭音乐</span></div>
+        {/if}
+        
+        {if $time >= 0}
+        <form action="{php echo purl('createOrder')}" id="form" name="form" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="pid" value="{$row['id']}">
+            <input type="hidden" name="order_sn" value="{$order['order_sn']}">
+            <input type="hidden" name="oid" value="{php echo $_GPC['oid']}">
+            <div class="form-close">×</div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">您的姓名：</label></div>
+                    <div class="weui-cell__bd">
+                        {if empty($order)}
+                        <input class="weui-input" name="name" type="text" placeholder="您的真实姓名">
+                        {else}
+                        {$order['name']}
+                        {/if}
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">手机号码：</label></div>
+                    <div class="weui-cell__bd">
+                        {if empty($order)}
+                        <input class="weui-input" name="mobile" type="tel" placeholder="11位手机号码">
+                        {else}
+                        {$order['mobile']}
+                        {/if}
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="" class="weui-label">身份类型：</label></div>
+                    <div class="weui-cell__bd">
+                        {if empty($order)}
+                        <select class="weui-select" name="type">
+                            <option value="">请选择类型</option>
+                            <option value="1">新学（会）员</option>
+                            <option value="2">老学（会）员</option>
+                            <option value="3">推广员/老师/工作人员（不享受优惠）</option>
+                        </select>
+                        {else}
+                        {if $order['type']==1}新学（会）员{/if}
+                        {if $order['type']==2}老学（会）员{/if}
+                        {if $order['type']==3}推广员/老师/工作人员（不享受优惠）{/if}
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <button id="submitForm" class="weui-btn weui-btn_primary" type="submit">确认提交</button>
+            </div>
+        </form>
+        {/if}
+        
+        {if $row['design_status'] == 2}
+        <div class="modal" id="shareimg">
+            <div class="modal-content">
+                <div class="modal-header">长按图片给好友</div>
+                <div class="modal-body align-center">
+                    <img src="{WEB_RESOURCE}/images/default.png" data-original="{php echo purl('createdesign', ['pid'=>$row['id'], 'oid'=>$order['id'], 'rand'=>random(20)])}" class="media-shareimg">
+                </div>
+                <div class="modal-footer"><a href="javascript:;" class="modal-close">关闭</a></div>
+            </div>
+        </div>
+        {/if}
+
+        {if $buyed && $row['is_cav'] == 2}
+        <div class="modal" id="shareqrcode">
+            <div class="modal-content">
+                <div class="modal-header">我的二维码</div>
+                <div class="modal-body align-center">
+                    <img src="{WEB_RESOURCE}/images/default.png" data-original="{php echo purl('pinqrcode', ['pid'=>$row['id'], 'oid'=>$order['id'], 'rand'=>random(20)])}" class="media-shareimg2" style="width:100%">
+                    <p style="font-size:12px;line-height:18px;padding:20px;color:#888">参与时请向工作人员提供此二维码</p>
+                </div>
+                <div class="modal-footer"><a href="javascript:;" class="modal-close">关闭</a></div>
+            </div>
+        </div>
+        {/if}
+    </div>
+
+<script>
+
+    require(['jquery'], function($) {
+        $.fn.extend({
+            dshow: function() {
+                $(this).css({
+                    'transition': 'linear .2s',
+                    'visibility': 'visible',
+                    'opacity': '1'
+                });
+                $('body').css('position', 'relative');
+                $('#dshow_style').remove();
+            }
+        });
+    });
+    
+    require(['jquery','frame'], function($, frame) {
+        $('.viewer-avatar').css('height', ($('body').width() * 0.142857 - 8) * 0.9 + 'px');
+        frame.changeViewTime({$time}, '#countdown');
+    });
+    
+    /**
+     * 打开信息填写页面 
+     */
+    require(['jquery'], function($) {
+        $('.form-close').on('click', function() {
+            $('#form').css('bottom', '-60%');
+        });
+        $('#buy').on('click', function() {
+            {if empty($order)}
+                $('#form').css('bottom', '-2px');
+            {else}
+                $('#form').submit();
+            {/if}
+        });
+    });
+    
+    /**
+     * 提交表单
+     */
+    require(['jquery', 'weui'], function($, weui) {
+
+        $('#form').on('submit', function() {
+            var _this = this;
+                
+                $('#submitForm').addClass('weui-btn_loading').prop('disabled', true).html('<i class="weui-loading"></i> 确认提交');
+
+                $.post('{php echo purl("createOrder")}', $(_this).serialize())
+                .done(function(res) {
+
+                    if(res.errno != 0) {
+                        alert(res.message);
+                        $('#submitForm').removeClass('weui-btn_loading').prop('disabled', false).html('确认提交');
+                        return false;
+                    }
+
+                    if(res.data.type == 3) {
+                        alert('报名成功！');
+                        location.reload();
+                        return ;
+                    }
+
+                    var order_sn = res.data.order_sn;
+                    var price = res.data.price;
+                    var pay_url = res.data.pay_url;
+                    
+                    location.href = pay_url + '/app/{php echo substr(purl("pay", $_GET), 2)}&order_sn='+order_sn;
+
+
+                })
+                .fail(function() {
+                    $('#submitForm').removeClass('weui-btn_loading').prop('disabled', false).html('确认提交');
+                    console.log('error');
+                });
+            return false;
+        })
+    });
+    
+    /**
+     *  wx对象
+     */
+    require(['jquery', 'lazyload'], function($) {
+
+        wx.ready(function() {
+        
+            $('#body').dshow();
+
+            $('img').lazyload({
+                effect : "fadeIn"
+            });
+            
+            var audio = new Audio();
+            audio.src = "{media $row['bgm']}";
+            if(!$('#music').hasClass('off')) {
+                audio.volume = 0.7;
+                audio.loop = true;
+                audio.play();
+            }
+
+            $('#music').on('click', function() {
+                if($(this).hasClass('off')) {
+                    $(this).html('<img src="{WEB_RESOURCE}/icon/toggle.svg" class="icon"><span>关闭音乐</span>');
+                    $(this).removeClass('off');
+                    audio && audio.play();
+                } else {
+                    $(this).html('<img src="{WEB_RESOURCE}/icon/toggle-off.svg" class="icon"><span>打开音乐</span>');
+                    $(this).addClass('off');
+                    audio && audio.pause();
+                }
+            });
+            
+            {php echo js_share($row["second_title"], $row["title"], $domainurl, '', ["pid"=>$row["id"], "oid"=>$_GPC["oid"]])}
+
+        });
+
+    });
+    
+    require(['jquery', 'marque'], function($, marque) {
+        marque('#regs', 90, '{$row["buyer_show_number"]}', 3);
+    });
+
+    require(['jquery', 'frame'], function($, frame) {
+        var shareimgControl = true;
+        var shareimg2Control = true;
+        $('#showimgmodal').on('click', function() {
+            $('#shareimg').addClass('modal-show');
+            if(shareimgControl) {
+                frame.img2base64('.media-shareimg', 'data-original');
+                shareimgControl = false;
+            }
+        });
+        $('.modal-close').on('click', function() {
+            $(this).parents('.modal').removeClass('modal-show');
+        });
+        $('#showimgmodal2').on('click', function() {
+            $('#shareqrcode').addClass('modal-show');
+            if(shareimg2Control) {
+                frame.img2base64('.media-shareimg2', 'data-original');
+                shareimg2Control = false;
+            }
+        });
+
+        
+    });
+
+</script>
+</body>
+</html>

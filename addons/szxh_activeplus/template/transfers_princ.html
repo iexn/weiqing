@@ -1,0 +1,72 @@
+{template 'common/header'}
+{template 'base/css'}
+<style>
+    td{vertical-align: middle!important}
+    .btn-group{margin-bottom:15px;}
+</style>
+{php unset($_GET['et'])}
+<div class="btn-group" role="group" aria-label="...">
+    <a href="{php echo aurl(17, $_GET)}" class="btn btn-default">导出以下返利记录</a>
+</div>
+<form action="javascript:;" method="GET" class="form-inline" id="form_search" style="float: right" data-search-ignore="page">
+    <div class="">
+        {php echo tpl_form_field_daterange('time', ['start'=>$_GPC['time']['start'] ?: '1970-01-01', 'end'=>$_GPC['time']['end'] ?: date('Y-m-d', time())])}
+        <input type="text" class="form-control" name="order_sn" placeholder="订单号" value="{$_GPC['order_sn']}">
+        <button class="btn btn-default" type="submit">搜索</button>
+    </div>
+</form> 
+<form action="javascript:void(0)" method="POST" id="form">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>订单号</th>
+        <th>下单用户</th>
+        <th>活动名称<span class="help-inline">（点击进入活动订单）</span></th>
+        <th>奖金</th>
+        <th>奖励至...</th>
+        <th>获取方式</th> <!-- 1推荐获得 2分享获得 -->
+        <th>发放时间</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {loop $list $index $item}
+    {php $user = userinfo($item['wechat_id'])}
+    {php $item['params'] = json_decode($item['params'], true)}
+    <tr>
+        <td><input type="checkbox" name="id[]" class="check-all" value="{$item['id']}"></td>
+        <td>{php echo $item['order_sn'] ?: '---'}</td>
+        <td>{php echo userinfo($item['order_user_id'])['nickname'] ?: '---'}</td>
+        <td><a href="{php echo aurl(6, 'active', ['pid'=>$item['active_id']])}">{$item['title']}</a></td>
+        <td>￥{$item['reward']}</td>
+        <td><img src="{media $user['avatar']}" style="width: 20px;height: 20px;border-radius: 50%"> {$user['nickname']}</td>
+        <td>{php echo getTransfersTypeName($item['send_type'])}</td>
+        <td>{php echo date('Y-m-d H:i', $item['create_time'])}</td>
+        <td>{php echo rewardsn($item['status'])}{if $item['status'] == 3}：{$item['reward_msg']}{/if}</td>
+        <td class="td{$item['transfers_sn']}">{if $item['status'] == 3}<a href="javascript:;" class="resendreward" data-transferssn="{$item['transfers_sn']}">点击补发</a>{/if}</td>
+    </tr>
+    {/loop}
+    </tbody>
+</table>
+{$page}
+</form>
+
+{template 'base/js'}
+<script>
+$('.resendreward').on('click', function() {
+    var _this = this;
+    var transfers_sn = $(this).data('transferssn');
+    if(!confirm('确定要补发该订单的红包奖励吗？')) {
+        return false;
+    }
+    post('{php echo aurl(9)}', {
+        transfers_sn: transfers_sn
+    }, function() {
+        $('.td'+transfers_sn).html('{php echo rewardsn(1)}');
+    });
+});
+</script>
+
+{template 'common/footer'}

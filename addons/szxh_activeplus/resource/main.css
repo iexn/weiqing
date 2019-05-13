@@ -1,0 +1,60 @@
+body{margin:0;background-color:#f0f0f0}
+p{margin:0;}
+img{margin-bottom:-4px}
+a{color:inherit;font-size:inherit;}
+ul{padding:0;margin:0}
+li{list-style:none}
+b{display:inline-block;clear:both}
+.nw{white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+#detail{text-align:center;background:white;padding:10px 0;font-size:16px;}
+#viewers{margin-top:10px;background:white;height:auto;overflow:hidden;}
+#countdown_title{margin-top:15px;}
+#countdown{margin-top:15px;line-height:32px}
+#countdown span{display:inline-block;background:tomato;margin:0 6px;color:white;border-radius:3px;width:32px;height:32px;vertical-align:top}
+.viewer,.reg{float:left;width:14.285714%;text-align:center;box-sizing:border-box;padding:4px;font-size:14px;}
+.viewer p{margin:5px 0;text-overflow:ellipsis;;overflow:hidden;}
+.viewer-avatar,.reg-avatar{width:90%;text-align:center;border-radius:50%;}
+#content{margin-top:10px;margin-bottom:40px;background:white}
+.title{font-weight:bold;padding:20px 0}
+.title:before{content:'';display:inline-block;width:6px;height:16px;background:tomato;vertical-align:-2px;margin-right:15px}
+.text{padding:10px}
+#register,#ranking{background:white;margin-top:10px;}
+.title-normal{font-weight:normal;font-size:14px;padding-left:10px}
+#create{position:fixed;top:0;left:0;width:100%;height:40px;line-height:40px;font-size:18px;background:tomato;text-align:center;color:white;text-decoration:none;opacity:0.8}
+#form{position:fixed;bottom:-60%;left:0;background:white;width:100%;padding:10px 5%;box-sizing:border-box;transition:ease .5s;}
+.form-close{position:absolute;width:40px;height:40px;left:50%;top:0;margin-left:-20px;margin-top:-20px;color:#666;border-radius:50%;background:#ccc;font-size:24px;text-align:center;}
+.of-h{overflow:hidden;height:22px}
+.ws-n{white-space:nowrap}
+#reg-box{overflow:hidden;position:relative;margin:0 3% 15px;width:94%;}
+#regs{font-size:14px;position:absolute;top:0;width:100%;}
+#regs li{background-color:rgb(251,240,226);width:100%;height:80px;margin-bottom:10px}
+.regs-avatar{float:left;margin-right:4%}
+.regs-txt{float:left;width:35%;}
+.regs-price{float:right;line-height:80px;color:rgb(228,74,74);font-weight:bold;width:28%;text-align:right;padding-right:5%;}
+.regs-name{color:rgb(69,148,62);margin:15px 0 5px}
+.regs-time{color:#ccc;margin:0 0 5px}
+.reg-none{line-height:180px;text-align:center}
+.icon{width:20px;height:20px;vertical-align:super;margin-right:5px}
+#share{position:fixed;bottom:170px;right:-20px;color:#1296db;font-size:14px;background:white;border:1px solid #ccc;padding:0 15px;height:40px;line-height:40px;padding-right:30px;border-radius:20px/20px}
+#phone{position:fixed;bottom:120px;right:-20px;color:#1296db;font-size:14px;background:white;border:1px solid #ccc;padding:0 15px;height:40px;line-height:40px;padding-right:30px;border-radius:20px/20px}
+#music{position:fixed;bottom:70px;right:-20px;color:#1296db;font-size:14px;background:white;border:1px solid #ccc;padding:0 15px;height:40px;line-height:40px;padding-right:30px;border-radius:20px/20px}
+#music.off{color:#bfbfbf}
+#share span,#phone span,#music span{display:inline-block;width:29px;line-height:16px;margin-top:4px}
+#ranks{min-height:120px}
+#ranks li{height:60px;padding:15px}
+.ranks-avatar{float:left;width:60px;height:60px;margin-right:4%;border-radius:50%;overflow:hidden}
+.ranks-avatar img{width:100%}
+.ranks-txt{float:left;width:calc(100% - 8% - 100px);line-height:30px;height:60px}
+.ranks-top{float:left;width:40px;margin-right:4%;height:60px;line-height:60px;text-align:center}
+.ranks-intro{height:20px!important;line-height:20px;text-align:center;font-size:13px;color:#888}
+.list-item{display:flex;position:fixed;width:100%;height:40px;left:0;bottom:0;justify-content:space-between;}
+.buy{width:100%;height:40px;line-height:40px;font-size:18px;background:tomato;text-align:center;color:white;text-decoration:none}
+.list-item .buy:not(:first-child){border-left:1px solid white}
+.modal{position:fixed;top:1000%;left:0;z-index:9999;width:100%;height:100%;background:rgba(0,0,0,.6);}
+.modal.modal-show{top:0;}
+.modal-content{position:absolute;top:0;left:0;bottom:0;right:0;margin:auto;width:80%;height:80%;border:1px solid #ccc;background:#f0f0f0;overflow:hidden;}
+.modal-header{position:relative;width:100%;text-align:center;height:60px;line-height:60px;border-bottom:1px dotted #ccc;font-family:"Microsoft YaHei";color:tomato;font-size:18px;font-weight:bold;}
+.modal-body{position:relative;padding:10px 15px;height:calc(100% - 122px);box-sizing:border-box;overflow:hidden;}
+.modal-footer{position:relative;width:100%;border-top:1px solid transparent;box-sizing:border-box;padding:10px 12px;text-align:center;height:60px;line-height:40px;}
+.modal-close{display:inline-block;background:tomato;width:100%;height:100%;border-radius:5px;color:white;}
+.media-shareimg{max-width:100%;max-height:100%;width:100%}

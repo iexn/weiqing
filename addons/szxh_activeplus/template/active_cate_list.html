@@ -1,0 +1,44 @@
+{template 'common/header'}
+{template 'base/css'}
+<style>
+    td{vertical-align: middle!important}
+    .btn-group{margin-bottom:15px;}
+</style>
+
+<div class="btn-group" role="group" aria-label="...">
+    <a href="{php echo aurl(2)}" class="btn btn-default">新增</a>
+    <a href="{php echo aurl(3)}" class="btn btn-default ajax-post">保存</a>
+    <a href="#" class="btn btn-default check-all-control">全选</a>
+    <a href="{php echo aurl(4)}" class="btn btn-default ajax-post confirm" data-confirm="确定要删除勾选项吗?">删除</a>
+</div>
+<form action="javascript:void(0)" method="POST" id="form">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <td>#</td>
+        <td>编号</td>
+        <td width="60%">类别名称</td>
+        <td>排序</td>
+        <td>操作</td>
+    </tr>
+    </thead>
+    <tbody>
+    {loop $dataList $index $item}
+    <tr>
+        <td><input type="checkbox" name="id[]" class="check-all" value="{$item['id']}"></td>
+        <td>{$item['id']}</td>
+        <td>{$item['title']}</td>
+        <td><input type="text" class="form-control text-width-small" name="sort[{$item['id']}]" value="{$item['sort']}"></td>
+        <td><a href="{php echo aurl(['et'=>2, 'pid'=>$item['id']])}">修改</a></td>
+    </tr>
+    {/loop}
+    </tbody>
+</table>
+</form>
+
+{template 'base/js'}
+<script>
+
+</script>
+
+{template 'common/footer'}

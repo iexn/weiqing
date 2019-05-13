@@ -1,0 +1,108 @@
+{template 'common/header'}
+{template 'base/css'}
+
+<form action="{php echo aurl(5)}" id="form" method="post" enctype="multipart/form-data">
+    <div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#base" aria-controls="base" role="tab" data-toggle="tab">防屏蔽设置</a></li>
+        </ul>
+    
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="base">
+    
+                <div class="szxh-line">
+                    <span class="szxh-title">防屏蔽功能：</span>
+                    <span class="szxh-setting">
+                        <select class="form-control text-width-normal" name="status" id="status">
+                            <option value="2" {if $row['status'] == 2}selected='selected'{/if}>关闭</option>
+                            <option value="1" {if $row['status'] == 1}selected='selected'{/if}>开启</option>
+                        </select>
+                    </span>
+                </div>
+
+                <div class="szxh-line">
+                    <span class="szxh-title">支付域名设置：</span>
+                    <span class="szxh-setting">
+                        http://&ensp;
+                        <input type="text" class="form-control text-width-normal text-align-center" name="pay_url" value="{$row['pay_url']}">
+                        &ensp;/
+                        <p class="help-block">开启防屏蔽功能后，支付时跳转到此域名下进行支付</p>
+                    </span>
+                </div>
+
+                <div class="szxh-line">
+                    <span class="szxh-title">分享域名设置：</span>
+                    <span class="szxh-setting">
+                        http://&ensp;
+                        <input type="text" class="form-control text-width-normal text-align-center" name="share_url" value="{$row['share_url']}">
+                        &ensp;/
+                        <p class="help-block">开启防屏蔽功能后，分享链接的域名会改为当前你域名</p>
+                    </span>
+                </div>
+
+                <div class="szxh-line">
+                    <span class="szxh-title">访问绑定：</span>
+                    <span class="szxh-setting">
+                        <textarea name="shield_url" class="form-control text-width-large text-height-area">{$row['shield_url']}</textarea>
+                        <p class="help-block">
+                            1. 开启防屏蔽功能后，访问活动会跳转至此参数的第一个域名，域名前追加随机子域名。
+                            <br>&emsp;如填写：xxx.{$domain}，访问活动时会跳转至 xxxx.xxx.{$domain}
+                            <br>2. 每一行为一个域名，域名格式： xxx.{$domain}。
+                        </p>
+                    </span>
+                </div>
+
+                <div class="szxh-line">
+                    <span class="szxh-title">域名白名单：</span>
+                    <span class="szxh-setting">
+                        <textarea name="domain_wl" class="form-control text-width-large text-height-area">{$row['domain_wl']}</textarea>
+                        <p class="help-block">
+                            1. 开启防屏蔽功能后，在此设置的域名，打开活动时不进行防屏蔽域名跳转。<br>
+                            2. 每一行为一个域名，域名格式： xxx.{$domain} ，不填写端口号。
+                        </p>
+                    </span>
+                </div>
+
+                <div class="szxh-line">
+                    <span class="szxh-title">域名黑名单：</span>
+                    <span class="szxh-setting">
+                        <textarea name="domain_bl" class="form-control text-width-large text-height-area">{$row['domain_bl']}</textarea>
+                        <p class="help-block">
+                            1. 开启防屏蔽功能后，使用以上域名访问活动时，页面时将不会显示内容。 <br>
+                            2. 每一行为一个域名，域名格式： xxx.{$domain} ，不填写端口号。
+                        </p>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        <div class="szxh-line"><span class="szxh-title"></span><span class="szxh-setting"><button type="submit" name="submit" class="btn btn-info">提交保存</button></span></div>
+    
+    </div>
+    
+
+</form>
+{template 'base/js'}
+<script>
+
+    $('#form').on('submit', function(e) {
+        
+        var data = $(this).serialize();
+        // TODO
+        post('{php echo aurl(5)}', data, function() {
+            setTimeout(function() {
+                location.reload();
+            }, 2000);
+        });
+
+        return false;
+    })
+
+
+
+</script>
+
+{template 'common/footer'}

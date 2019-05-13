@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>投诉</title>
+    <link rel="stylesheet" href="{WEB_RESOURCE}/weui/dist/style/weui.min.css">
+    <link rel="stylesheet" href="{WEB_RESOURCE}/main.css">
+    <script src="{WEB_RESOURCE}/library/jquery.min.js"></script>
+    <script src="{WEB_RESOURCE}/weui.js/dist/weui.min.js"></script>
+    <script src="{WEB_RESOURCE}/library/router.js"></script>
+</head>
+<body>
+    <div id="box"></div>
+    <script type="text/html" id="tpl_main">
+        <div class="weui-cells__title">请选择投诉该网页的原因</div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access js_item" data-id="button" href="#qizha">
+                <div class="weui-cell__bd">
+                    <p>网页包含欺诈信息（如：假红包）</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <a class="weui-cell weui-cell_access js_item" data-id="button" href="#seqing">
+                <div class="weui-cell__bd">
+                    <p>网页包含色情信息</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <a class="weui-cell weui-cell_access js_item" data-id="button" href="#baoli">
+                <div class="weui-cell__bd">
+                    <p>网页包含暴力恐怖信息</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <a class="weui-cell weui-cell_access js_item" data-id="button" href="#zhengzhi">
+                <div class="weui-cell__bd">
+                    <p>网页包含政治敏感信息</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <a class="weui-cell weui-cell_access js_item" data-id="button" href="#yinsi">
+                <div class="weui-cell__bd">
+                    <p>网页在手机个人隐私信息（如：钓鱼链接）</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <a class="weui-cell weui-cell_access js_item" data-id="button" href="#youdao">
+                <div class="weui-cell__bd">
+                    <p>网页包含诱导分享/关注性质的内容</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <a class="weui-cell weui-cell_access js_item" data-id="button" href="#yaoyan">
+                <div class="weui-cell__bd">
+                    <p>网页可能包含谣言信息</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <a class="weui-cell weui-cell_access js_item" data-id="button" href="#dubo">
+                <div class="weui-cell__bd">
+                    <p>网页包含赌博信息</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+        </div>
+        <label for="weuiAgree" class="weui-agree">
+            <span class="weui-agree__text">
+                <a href="https://mp.weixin.qq.com/s/TbX1CcZhQNReneXVc3At9Q">遇到网页流量被劫持怎么办</a>
+            </span>
+        </label>
+        <div class="weui-footer weui-footer_fixed-bottom">
+            <p class="weui-footer__links">
+                <a href="https://weixin110.qq.com/security/readtemplate?t=w_security_center_website/report_agreement&lang=zh_CN" class="weui-footer__link">投诉须知</a>
+            </p>
+        </div>
+    </script>
+    <script type="text/html" id="tpl_normal">
+        <div class="weui-cells__title">你可以：</div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access js_item" data-id="button" href="#complete">
+                <div class="weui-cell__bd">
+                    <p>提交给微信团队审核</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+        </div>
+    </script>
+    <script type="text/html" id="tpl_youdao">
+        <div class="weui-cells__title">你可以：</div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access js_item" data-id="button" href="#complete">
+                <div class="weui-cell__bd">
+                    <p>提交给微信团队审核</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+        </div>
+        <label for="weuiAgree" class="weui-agree">
+            <span class="weui-agree__text">
+                <a href="https://weixin110.qq.com/security/readtemplate?t=w_security_center_website/report_agreement&lang=zh_CN&pass_ticket=7DjNbe7QVR6X%2FNQlOlZh%2BakHXMx0uDUlHb71A2BMyMY%3D&wechat_real_lang=zh_CN">了解什么是诱导分享类内容</a>
+            </span>
+        </label>
+    </script>
+    <script type="text/html" id="tpl_yaoyan">
+        <div class="weui-cells__title">你可以：</div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access js_item" data-id="button" href="#complete">
+                <div class="weui-cell__bd">
+                    <p>提交给微信团队审核</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+        </div>
+        <label for="weuiAgree" class="weui-agree">
+            <span class="weui-agree__text">
+                <a href="https://mp.weixin.qq.com/s/w2VEz97HTsYTNALskHlSIQ">了解微信对谣言的治理</a>
+            </span>
+        </label>
+    </script>
+    <script type="text/html" id="tpl_complete">
+        <div style="padding:1.5em">
+            <p class="weui-msg"><i class="weui-icon-success weui-icon_msg"></i></p>
+            <p class="weui-msg" style="font-size: 18px">投诉已提交</p>
+            <p class="weui-tabbar__label" style="font-size: 14px">微信团队会尽快核实，并通过“微信团队”通知你审核结果。感谢你的支持。</p>
+            <p class="weui-msg"><a href="javascript:WeixinJSBridge.call('closeWindow');" class="weui-btn weui-btn_primary">关闭</a></p>
+        </div>
+    </script>
+    <script>
+        var loading = weui.loading('加载中', {
+            className: 'custom-classname'
+        });
+        setTimeout(function () {
+            loading.hide(function() {
+                 display_page('complete');
+             });
+        }, 1500);
+        $(function() {
+
+            loading.hide();
+
+            var box = $('#box');
+            function display_page(id){
+                box.html($('#tpl_'+id).html());
+            }
+            var Router = Window.Router;
+            Router.route('index', function() {
+                display_page('main');
+            });
+            Router.route('qizha',function() {
+                display_page('normal');
+            });
+            Router.route('seqing',function() {
+                display_page('normal');
+            });
+            Router.route('baoli',function() {
+                display_page('normal');
+            });
+            Router.route('zhengzhi',function() {
+                display_page('normal');
+            });
+            Router.route('yinsi',function() {
+                display_page('normal');
+            });
+            Router.route('youdao',function() {
+                display_page('youdao');
+            });
+            Router.route('yaoyan',function() {
+                display_page('yaoyan');
+            });
+            Router.route('dubo',function() {
+                display_page('normal');
+            });
+            Router.route('complete',function() {
+                var loading = weui.loading('加载中', {
+                    className: 'custom-classname'
+                });
+                setTimeout(function () {
+                    loading.hide(function() {
+                         display_page('complete');
+                     });
+                }, 1500);
+            });
+
+        });
+    </script>
+</body>
+</html>

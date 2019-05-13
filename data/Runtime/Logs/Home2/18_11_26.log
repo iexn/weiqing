@@ -1,0 +1,207 @@
+[ 2018-11-26T13:51:20+08:00 ] 127.0.0.1 /web/index.php?mm=Home&cc=Send&aa=index&c=site&a=entry&eid=36&mm=Home2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: openid D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\CommonController.class.php 第 14 行.
+NOTIC: [8] Undefined index: attachurl_remote D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\CommonController.class.php 第 22 行.
+NOTIC: [8] Use of undefined constant MODULE_URL - assumed 'MODULE_URL' D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\CommonController.class.php 第 24 行.
+NOTIC: [8] Use of undefined constant IN_MODULE - assumed 'IN_MODULE' D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\CommonController.class.php 第 26 行.
+SQL: SHOW COLUMNS FROM `ims_szxh_list_send` [ RunTime:0.0030s ]
+NOTIC: [8] Undefined index: start_time D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 15 行.
+NOTIC: [8] Undefined index: end_time D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 16 行.
+NOTIC: [8] Undefined index: p D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 26 行.
+NOTIC: [8] Undefined index: title D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 27 行.
+NOTIC: [8] Undefined index: active_id D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 28 行.
+NOTIC: [8] Undefined index: status D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 29 行.
+SQL: SELECT * FROM `ims_szxh_list_send` WHERE `create_time` >= 1541001600 ORDER BY `id` DESC LIMIT 0,15   [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `ims_szxh_list_send` WHERE `create_time` >= 1541001600 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(D:\wamp\www\w7_install\addons\szxh_list/Application/Home2/View/Common/w7_solution.html): failed to open stream: No such file or directory D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined offset: 2 D:\wamp\www\w7_install\framework\function\global.func.php 第 315 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: active_id D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 78 行.
+NOTIC: [8] Undefined index: title D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 79 行.
+NOTIC: [8] Undefined index: status D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 82 行.
+NOTIC: [8] Undefined index: status D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 83 行.
+NOTIC: [8] Undefined index: status D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 84 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: extras D:\wamp\www\w7_install\web\common\tpl.func.php 第 350 行.
+NOTIC: [8] Undefined index: extras D:\wamp\www\w7_install\web\common\tpl.func.php 第 356 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: displayorder D:\wamp\www\w7_install\framework\model\module.mod.php 第 359 行.
+NOTIC: [8] Undefined index: shortcut D:\wamp\www\w7_install\framework\model\module.mod.php 第 360 行.
+NOTIC: [8] Undefined variable: m D:\wamp\www\w7_install\web\source\site\entry.ctrl.php 第 97 行.
+NOTIC: [512] 访问的方法 doWebMain 不存在. D:\wamp\www\w7_install\framework\class\account.class.php 第 1164 行.
+
+[ 2018-11-26T13:51:51+08:00 ] 127.0.0.1 /web/index.php?mm=Home&cc=Send&aa=index&c=site&a=entry&eid=36&mm=Home2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: openid D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\CommonController.class.php 第 14 行.
+NOTIC: [8] Undefined index: attachurl_remote D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\CommonController.class.php 第 22 行.
+NOTIC: [8] Use of undefined constant MODULE_URL - assumed 'MODULE_URL' D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\CommonController.class.php 第 24 行.
+NOTIC: [8] Use of undefined constant IN_MODULE - assumed 'IN_MODULE' D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\CommonController.class.php 第 26 行.
+SQL: SHOW COLUMNS FROM `ims_szxh_list_send` [ RunTime:0.0030s ]
+NOTIC: [8] Undefined index: start_time D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 15 行.
+NOTIC: [8] Undefined index: end_time D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 16 行.
+NOTIC: [8] Undefined index: p D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 26 行.
+NOTIC: [8] Undefined index: title D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 27 行.
+NOTIC: [8] Undefined index: active_id D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 28 行.
+NOTIC: [8] Undefined index: status D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 29 行.
+SQL: SELECT * FROM `ims_szxh_list_send` WHERE `create_time` >= 1541001600 ORDER BY `id` DESC LIMIT 0,15   [ RunTime:0.0000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `ims_szxh_list_send` WHERE `create_time` >= 1541001600 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(D:\wamp\www\w7_install\addons\szxh_list/Application/Home2/View/Common/w7_solution.html): failed to open stream: No such file or directory D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined offset: 2 D:\wamp\www\w7_install\framework\function\global.func.php 第 315 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: active_id D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 78 行.
+NOTIC: [8] Undefined index: title D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 79 行.
+NOTIC: [8] Undefined index: status D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 82 行.
+NOTIC: [8] Undefined index: status D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 83 行.
+NOTIC: [8] Undefined index: status D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 84 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: extras D:\wamp\www\w7_install\web\common\tpl.func.php 第 350 行.
+NOTIC: [8] Undefined index: extras D:\wamp\www\w7_install\web\common\tpl.func.php 第 356 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: displayorder D:\wamp\www\w7_install\framework\model\module.mod.php 第 359 行.
+NOTIC: [8] Undefined index: shortcut D:\wamp\www\w7_install\framework\model\module.mod.php 第 360 行.
+NOTIC: [8] Undefined variable: m D:\wamp\www\w7_install\web\source\site\entry.ctrl.php 第 97 行.
+NOTIC: [512] 访问的方法 doWebMain 不存在. D:\wamp\www\w7_install\framework\class\account.class.php 第 1164 行.
+
+[ 2018-11-26T13:51:52+08:00 ] 127.0.0.1 /web/index.php?mm=Home2&cc=Send&aa=index&c=site&a=entry&eid=36
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: openid D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\CommonController.class.php 第 14 行.
+NOTIC: [8] Undefined index: attachurl_remote D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\CommonController.class.php 第 22 行.
+NOTIC: [8] Use of undefined constant MODULE_URL - assumed 'MODULE_URL' D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\CommonController.class.php 第 24 行.
+NOTIC: [8] Use of undefined constant IN_MODULE - assumed 'IN_MODULE' D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\CommonController.class.php 第 26 行.
+SQL: SHOW COLUMNS FROM `ims_szxh_list_send` [ RunTime:0.0030s ]
+NOTIC: [8] Undefined index: start_time D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 15 行.
+NOTIC: [8] Undefined index: end_time D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 16 行.
+NOTIC: [8] Undefined index: p D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 26 行.
+NOTIC: [8] Undefined index: title D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 27 行.
+NOTIC: [8] Undefined index: active_id D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 28 行.
+NOTIC: [8] Undefined index: status D:\wamp\www\w7_install\addons\szxh_list\Application\Active\Controller\SendController.class.php 第 29 行.
+SQL: SELECT * FROM `ims_szxh_list_send` WHERE `create_time` >= 1541001600 ORDER BY `id` DESC LIMIT 0,15   [ RunTime:0.0000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `ims_szxh_list_send` WHERE `create_time` >= 1541001600 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(D:\wamp\www\w7_install\addons\szxh_list/Application/Home2/View/Common/w7_solution.html): failed to open stream: No such file or directory D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined offset: 2 D:\wamp\www\w7_install\framework\function\global.func.php 第 315 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: active_id D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 78 行.
+NOTIC: [8] Undefined index: title D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 79 行.
+NOTIC: [8] Undefined index: status D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 82 行.
+NOTIC: [8] Undefined index: status D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 83 行.
+NOTIC: [8] Undefined index: status D:\wamp\www\w7_install\data\Runtime\Cache\Home2\ab71c66af58bfa3c3be9fc5afc9cad36.php 第 84 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: extras D:\wamp\www\w7_install\web\common\tpl.func.php 第 350 行.
+NOTIC: [8] Undefined index: extras D:\wamp\www\w7_install\web\common\tpl.func.php 第 356 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+NOTIC: [8] Undefined index: do D:\wamp\www\w7_install\addons\szxh_list\ThinkPHP\Common\functions.php 第 929 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8] Undefined index: displayorder D:\wamp\www\w7_install\framework\model\module.mod.php 第 359 行.
+NOTIC: [8] Undefined index: shortcut D:\wamp\www\w7_install\framework\model\module.mod.php 第 360 行.
+NOTIC: [8] Undefined variable: m D:\wamp\www\w7_install\web\source\site\entry.ctrl.php 第 97 行.
+NOTIC: [512] 访问的方法 doWebMain 不存在. D:\wamp\www\w7_install\framework\class\account.class.php 第 1164 行.
+

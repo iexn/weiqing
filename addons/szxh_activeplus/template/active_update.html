@@ -1,0 +1,478 @@
+{template 'common/header'}
+{template 'base/css'}
+
+<form action="{php echo aurl(5)}" id="form" method="post" enctype="multipart/form-data">
+<input name="token" type="hidden" value="{$_W['token']}" />
+<input type="hidden" name="id" value="{$row['id']}" />
+<div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#base" aria-controls="base" role="tab" data-toggle="tab">基本信息</a></li>
+        <li role="presentation"><a href="#extend" aria-controls="extend" role="tab" data-toggle="tab">扩展选项</a></li>
+        <li role="presentation"><a href="#attract" aria-controls="attract" role="tab" data-toggle="tab">招商设置</a></li>
+        <li role="presentation"><a href="#redpack" aria-controls="redpack" role="tab" data-toggle="tab">推荐返利</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="base">
+            
+            {if $_W['role'] != 'clerk'}
+            <div class="szxh-line">
+                <span class="szxh-title">显示状态：</span>
+                <span class="szxh-setting">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-info {if $row['status'] == 1} active{/if}">
+                            <input type="radio" name="status" value="1" id="option1" autocomplete="off" {if $row['status'] == 1}checked{/if}> 审核中
+                        </label>
+                        <label class="btn btn-info {if $row['status'] == 2 || empty($row['status'])} active{/if}">
+                            <input type="radio" name="status" value="2" id="option1" autocomplete="off" {if $row['status'] == 2 || empty($row['status'])}checked{/if}> 正常
+                        </label>
+                        <label class="btn btn-info {if $row['status'] == 3} active{/if}">
+                            <input type="radio" name="status" value="3" id="option2" autocomplete="off" {if $row['status'] == 3}checked{/if}> 关闭
+                        </label>
+                    </div>
+                </span>
+            </div>
+            {/if}
+            
+            <div class="szxh-line">
+                <span class="szxh-title">所属类别：</span>
+                <span class="szxh-setting">
+                    <select class="form-control text-width-normal" name="active_cate_id">
+                        <option value="0">请选择类别</option>
+                        {loop $activeCates $cate}
+                        <option value="{$cate['id']}" {if $row['active_cate_id'] == $cate['id']}selected{/if}>{$cate['title']}</option>
+                        {/loop}
+                    </select>
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">内容标题：</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control" name="title" value="{$row['title']}">
+                    <p class="help-block">标题最多100个字符</p>
+                </span>
+            </div>
+            
+            <div class="szxh-line">
+                <span class="szxh-title">封面图片：</span>
+                <span class="szxh-setting">{php echo tpl_form_field_image('cover', $row['cover'])}</span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">分享活动二维码：</span>
+                <span class="szxh-setting">
+                    <select class="form-control text-width-normal" name="design_status" id="design_status">
+                        <option value="1">关闭</option>
+                        <option value="2" {if $row['design_status'] == 2}selected='selected'{/if}>开启</option>
+                    </select>
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">商品价格：</span>
+                <span class="szxh-setting"><input type="number" class="form-control text-width-small" name="price" value="{$row['price']}" step="0.01" {if $_W['role'] == 'clerk' && !empty($row['id'])}disabled="disabled"{/if}> 元</span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">关联客服：</span>
+                <span class="szxh-setting">
+                    <select class="form-control text-width-normal" name="service_user_id" {if $_W['role'] == 'clerk'}disabled="disabled"{/if}>
+                        <option value="0" >请选择客服</option>
+                        {loop $serviceUsers $user}
+                        <option value="{$user['id']}" {if $row['service_user_id'] == $user['id'] || $_W['uid'] == $user['uid']}selected{/if}>{$user['name']}</option>
+                        {/loop}
+                    </select>
+                    {if $_W['role'] == 'clerk'}
+                        <input type="hidden" name="service_user_id" value="{$_W['uid']}">
+                    {/if}
+                    <p class="help-block">客服选定之后不能再修改</p>
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">内容描述：</span>
+                <span class="szxh-setting limithigh">{php echo tpl_ueditor('content', $row['content'])}</span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">结束时间：</span>
+                <span class="szxh-setting text-width-normal">{php echo _tpl_form_field_date('end_time', $row['end_time'])}</span>
+            </div>
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="extend">
+            <div class="szxh-line">
+                <span class="szxh-title">开启核销：</span>
+                <span class="szxh-setting">
+                    <select class="form-control text-width-normal" name="is_cav" id="is_cav">
+                        <option value="1">关闭</option>
+                        <option value="2" {if $row['is_cav'] == 2}selected='selected'{/if}>开启</option>
+                    </select>
+                    <p class="help-block">开启核销后，用户通过活动页面报名并支付成功，活动页面下方会出现【查看我的二维码】。该二维码在前往报名时出示给核销员使用。</p>
+                </span>
+            </div>
+            
+            <div class="szxh-line">
+                <span class="szxh-title">活动小标题：</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control" name="second_title" value="{$row['second_title']}" placeholder="我是%NAME%，我正在参加%TITLE%活动，快来加入我们吧~">
+                    <p class="help-block">
+                        最多100个字符，不能和活动标题内容相同。标题支持替换符：<br>
+                        写入 %TITLE% ，将替换为当前活动标题；<br>
+                        写入 %USER% ，将替换为分享人微信昵称；<br>
+                        写入 %NAME% ，将替换为分享人下单姓名。
+                    </p>
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">页面设置：</span>
+                <span class="szxh-setting">
+                    <div>
+                        红包排行榜显示用户个数：&emsp;<select name="redpack_show_number">
+                            <option value="10" {if $row['redpack_show_number'] == 10}selected="selected"{/if}>10个</option>
+                            <option value="9" {if $row['redpack_show_number'] == 9}selected="selected"{/if}>9个</option>
+                            <option value="8" {if $row['redpack_show_number'] == 8}selected="selected"{/if}>8个</option>
+                            <option value="7" {if $row['redpack_show_number'] == 7}selected="selected"{/if}>7个</option>
+                            <option value="6" {if $row['redpack_show_number'] == 6}selected="selected"{/if}>6个</option>
+                            <option value="5" {if $row['redpack_show_number'] == 5}selected="selected"{/if}>5个</option>
+                            <option value="4" {if $row['redpack_show_number'] == 4}selected="selected"{/if}>4个</option>
+                            <option value="3" {if $row['redpack_show_number'] == 3}selected="selected"{/if}>3个</option>
+                            <option value="2" {if $row['redpack_show_number'] == 2}selected="selected"{/if}>2个</option>
+                            <option value="1" {if $row['redpack_show_number'] == 1}selected="selected"{/if}>1个</option>
+                            <option value="0" {if $row['redpack_show_number'] == 0}selected="selected"{/if}>不显示&emsp;</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div>
+                        购买记录高度：&emsp;<select name="buyer_show_number">
+                            <option value="5" {if $row['buyer_show_number'] == 5}selected="selected"{/if}>5人高</option>
+                            <option value="4" {if $row['buyer_show_number'] == 4}selected="selected"{/if}>4人高</option>
+                            <option value="3" {if $row['buyer_show_number'] == 3}selected="selected"{/if}>3人高</option>
+                            <option value="2" {if $row['buyer_show_number'] == 2}selected="selected"{/if}>2人高</option>
+                            <option value="1" {if $row['buyer_show_number'] == 1}selected="selected"{/if}>1人高</option>
+                            <option value="0" {if $row['buyer_show_number'] == 0}selected="selected"{/if}>不显示购买记录</option>
+                        </select>
+                    </div>
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">活动策划人：</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control text-width-normal" name="planner" value="{$row['planner']}">
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">机构地区：</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control" name="inst" value="{$row['inst']}">
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">学校名称：</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control" name="school" value="{$row['school']}">
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">收货人姓名：</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control text-width-normal" name="consignee" value="{$row['consignee']}">
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">收货人联系电话：</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control text-width-normal" name="consignee_mobile" value="{$row['consignee_mobile']}">
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">收货地址：</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control" name="consignee_addr" value="{$row['consignee_addr']}">
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">货品：</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control" name="goods" value="{$row['goods']}">
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">新学员礼品：</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control" name="new_user_gift" value="{$row['new_user_gift']}" list="new_user_gift_list" autocomplete="true">
+                    <datalist id="new_user_gift_list">
+                        {loop $gifts $gift}
+                        <option value="{$gift}"></option>
+                        {/loop}
+                    </datalist>
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">老学员礼品：</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control" name="old_user_gift" value="{$row['old_user_gift']}" list="old_user_gift_list" autocomplete="true">
+                    <datalist id="old_user_gift_list">
+                        {loop $gifts $gift}
+                        <option value="{$gift}"></option>
+                        {/loop}
+                    </datalist>
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">客服电话：</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control text-width-normal" name="service_tel" value="{$row['service_tel']}">
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">背景音乐：</span>
+                <span class="szxh-setting">
+                    {php echo tpl_form_field_audio('bgm', $row['bgm'])}
+                </span>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="attract">
+
+            <div class="szxh-line">
+                <span class="szxh-title">是否开启招商</span>
+                <span class="szxh-setting">
+                    <select name="attract_status" id="attract_status">
+                        <option value="1" {if $row['attract_status'] == 1}selected="selected"{/if}>开启&emsp;</option>
+                        <option value="2" {if $row['attract_status'] == 2}selected="selected"{/if}>关闭&emsp;</option>
+                    </select>
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">招商文字</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control" name="attract_title" value="{php echo $row['attract_title'] ?: '创建我的活动'}">
+                </span>
+            </div>
+            
+            <div class="szxh-line">
+                <span class="szxh-title">显示方式</span>
+                <span class="szxh-setting">
+                    <select name="attract_type" id="attract_type">
+                        <option value="1" {if $row["attract_type"] == 1}selected="selected"{/if}>客服二维码&emsp;</option>
+                        <option value="2" {if $row["attract_type"] == 2}selected="selected"{/if}>自定义跳转链接&emsp;</option>
+                        <option value="3" {if $row["attract_type"] == 3}selected="selected"{/if}>自定义内容&emsp;</option>
+                    </select>
+                </span>
+            </div>
+
+            <div class="szxh-line">
+                <span class="szxh-title">自定义跳转链接</span>
+                <span class="szxh-setting">
+                    <input type="text" class="form-control" name="attract_value_link" value="{$row['attract_value_link']}" placeholder="http(s)://">
+                    <span class="help-block">显示方式选择自定义跳转链接时必填此项。</span>
+                </span>
+            </div>
+            
+            <div class="szxh-line">
+                <span class="szxh-title">自定义内容</span>
+                <span class="szxh-setting limithigh">
+                    {php echo tpl_ueditor('attract_value_custom', $row['attract_value_custom'])}
+                    <span class="help-block">显示方式选择自定义内容时必填此项。</span>
+                </span>
+            </div>
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="redpack">
+
+            <div class="szxh-line">
+                <span class="szxh-title">返利功能：</span>
+                <span class="szxh-setting">
+                    <select class="form-control text-width-normal" name="redpack_status" id="redpack_status">
+                        <option value="1">开启</option>
+                        <option value="2" {if $row['redpack_status'] == 2}selected='selected'{/if}>关闭</option>
+                    </select>
+                    <p class="help-block">1. 开启微信返利时，需要在微擎 平台-支付参数-退款配置-微信退款 中上传证书并保存</p>
+                </span>
+            </div>
+
+            <div id="show_redpack_config"></div>
+            
+
+        </div>
+
+    </div>
+    <div class="szxh-line"><span class="szxh-title"></span><span class="szxh-setting"><button type="submit" class="btn btn-info">提交保存</button></span></div>
+
+</div>
+</form>
+
+{template 'base/js'}
+<script type="text/html" id="redpack_config">
+    <div class="szxh-line">
+        <span class="szxh-title">支付后返利：</span>
+        <span class="szxh-setting">
+            <select class="form-control text-width-normal" name="redpack_ispay" id="redpack_ispay">
+                <option value="1">开启</option>
+                <option value="2" {if $row['redpack_ispay'] == 2}selected='selected'{/if}>关闭</option>
+            </select>
+            <p class="help-block">支付后分享给好友并且好友成功支付时分享人获得返利。<br/>关闭后，分享人不需要支付也能获得返利。</p>
+        </span>
+    </div>
+    <div class="szxh-line">
+        <span class="szxh-title">分享后返利：</span>
+        <span class="szxh-setting">
+            
+            <select class="form-control text-width-large" name="share_reward_count" id="share_reward_count">
+                <option value="0">关闭红包分享</option>
+                <option value="1" {if $row['share_reward_count'] == 1}selected='selected'{/if}>分享 1 次后分享人获得红包</option>
+                <option value="2" {if $row['share_reward_count'] == 2}selected='selected'{/if}>分享 2 次后分享人获得红包</option>
+                <option value="3" {if $row['share_reward_count'] == 3}selected='selected'{/if}>分享 3 次后分享人获得红包</option>
+                <option value="4" {if $row['share_reward_count'] == 4}selected='selected'{/if}>分享 4 次后分享人获得红包</option>
+                <option value="5" {if $row['share_reward_count'] == 5}selected='selected'{/if}>分享 5 次后分享人获得红包</option>
+                <option value="6" {if $row['share_reward_count'] == 6}selected='selected'{/if}>分享 6 次后分享人获得红包</option>
+                <option value="7" {if $row['share_reward_count'] == 7}selected='selected'{/if}>分享 7 次后分享人获得红包</option>
+                <option value="8" {if $row['share_reward_count'] == 8}selected='selected'{/if}>分享 8 次后分享人获得红包</option>
+                <option value="9" {if $row['share_reward_count'] == 9}selected='selected'{/if}>分享 9 次后分享人获得红包</option>
+                <option value="10" {if $row['share_reward_count'] == 10}selected='selected'{/if}>分享 10 次后分享人获得红包</option>
+                <option value="11" {if $row['share_reward_count'] == 11}selected='selected'{/if}>分享 11 次后分享人获得红包</option>
+                <option value="12" {if $row['share_reward_count'] == 12}selected='selected'{/if}>分享 12 次后分享人获得红包</option>
+                <option value="13" {if $row['share_reward_count'] == 13}selected='selected'{/if}>分享 13 次后分享人获得红包</option>
+                <option value="14" {if $row['share_reward_count'] == 14}selected='selected'{/if}>分享 14 次后分享人获得红包</option>
+                <option value="15" {if $row['share_reward_count'] == 15}selected='selected'{/if}>分享 15 次后分享人获得红包</option>
+                <option value="16" {if $row['share_reward_count'] == 16}selected='selected'{/if}>分享 16 次后分享人获得红包</option>
+                <option value="17" {if $row['share_reward_count'] == 17}selected='selected'{/if}>分享 17 次后分享人获得红包</option>
+                <option value="18" {if $row['share_reward_count'] == 18}selected='selected'{/if}>分享 18 次后分享人获得红包</option>
+                <option value="19" {if $row['share_reward_count'] == 19}selected='selected'{/if}>分享 19 次后分享人获得红包</option>
+                <option value="20" {if $row['share_reward_count'] == 20}selected='selected'{/if}>分享 20 次后分享人获得红包</option>
+            </select>
+            
+            <input type="text" name="share_reward" value="{$row['share_reward']}" class="form-control text-width-small">
+            元
+            <p class="help-block">
+                1. 必须开启分享后设置的金额才能生效。<br>
+                2. 分享红包<span style="color:red">金额必须在微信授权发放金额范围内</span>，不然不会生效。<br>
+                3. 已获得红包的用户不再获得红包。<br>
+                <!-- <span style="color:red;font-size:16px">4. 使用微信在6.7.2及以上版本由于分享不稳定暂不支持【分享给好友】和【分享到朋友圈】功能，新版微信请通过活动下方的【分享活动马上赚钱】参与活动返利。</span> -->
+            </p>
+        </span>
+    </div>
+    <div class="szxh-line">
+        <span class="szxh-title">推荐返利：</span>
+        <span class="szxh-setting">
+            <input type="number"  class="form-control text-width-small" name="min_get" value="{$row['min_get']}" step="1" min="0" {if $_W['role'] == 'clerk' && !empty($row['id'])}disabled="disabled"{/if}>
+            /
+            <input type="number" class="form-control text-width-small" name="max_get" value="{$row['max_get']}" step="1" min="0" {if $_W['role'] == 'clerk' && !empty($row['id'])}disabled="disabled"{/if}>
+            单位：元 最小值 / 最大值（请填写整数） 
+        </span>
+    </div>
+    <div class="szxh-line">
+        <span class="szxh-title">返利给校长：</span>
+        <span class="szxh-setting">
+            <input type="number"  class="form-control text-width-small" name="princ_reward" value="{$row['princ_reward']}" step="0.01" min="0">
+            单位：元，最低1元，否则返利不会生效
+        </span>
+    </div>
+    <div class="szxh-line">
+        <span class="szxh-title">发放形式：</span>
+        <span class="szxh-setting">
+            <select class="form-control text-width-normal" name="redpack_type" id="redpack_type" onchange="showTransfers(this.value)" {if $_W['role'] == 'clerk' && !empty($row['id'])}disabled="disabled"{/if}>
+                <option value="1">微信现金红包</option>
+                <option value="2" {if $row['redpack_type'] == 2}selected='selected'{/if}>微信企业付款</option>
+            </select>
+            <p class="help-block">选择微信企业付款时，只需填写发送备注即可</p>
+        </span>
+    </div>
+    <div id="show_redpack_transfers_info"></div>
+</script>
+<script type="text/html" id="redpack_info">
+    <div class="szxh-line">
+        <span class="szxh-title">活动名称：</span>
+        <span class="szxh-setting">
+            <input type="text" class="form-control text-width-normal" name="redpack_name" value="{$row['redpack_name']}">
+            <p class="help-block">不超过10个字</p>
+        </span>
+    </div>
+    <div class="szxh-line">
+        <span class="szxh-title">发送人名称：</span>
+        <span class="szxh-setting">
+            <input type="text" class="form-control text-width-normal" name="redpack_sender" value="{$row['redpack_sender']}">
+        </span>
+    </div>
+    <div class="szxh-line">
+        <span class="szxh-title">红包祝福语：</span>
+        <span class="szxh-setting">
+            <input type="text" class="form-control" name="redpack_wishing" value="{$row['redpack_wishing']}">
+        </span>
+    </div>
+    <div class="szxh-line">
+        <span class="szxh-title">发放备注：</span>
+        <span class="szxh-setting">
+            <input type="text" class="form-control" name="redpack_remark" value="{$row['redpack_remark']}">
+        </span>
+    </div>
+</script>
+<script type="text/html" id="transfers_info">
+    <div class="szxh-line">
+        <span class="szxh-title">转账备注信息：</span>
+        <span class="szxh-setting">
+            <input type="text" class="form-control" name="transfers_remark" value="{$row['transfers_remark']}">
+        </span>
+    </div>
+</script>
+
+
+<script>
+    $('#form').on('submit', function(e) {
+        
+        var data = $(this).serialize();
+        // TODO
+        post('{php echo aurl(5)}', data, function() {
+            setTimeout(function() {
+                location.href = "{php echo aurl(1)}";
+            }, 2000);
+        });
+
+        return false;
+    })
+
+    showRedpackConfig($('#redpack_status').val() == 1);
+    $('#redpack_status').on('change', function() {
+        showRedpackConfig($('#redpack_status').val() == 1);
+    })
+
+    function showRedpackConfig(show) {
+        var html = '';
+        if(show) {
+            html = $('#redpack_config').html();
+        }
+        $('#show_redpack_config').html(html);
+        showTransfers($('#redpack_type').val());
+    }
+
+    function showTransfers(show) {
+        if(show == 1) {
+            $('#show_redpack_transfers_info').html($('#redpack_info').html());
+        }
+        if(show == 2) {
+            $('#show_redpack_transfers_info').html($('#transfers_info').html());
+        }
+    }
+
+</script>
+
+{template 'common/footer'}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{WEB_RESOURCE}/main.css">
+    <title>{$row['title']}</title>
+</head>
+<body>
+    {if $row['attract_type'] == 3}
+        {$row['attract_value_custom']}
+    {else}
+        <img src="{media $serviceuser['wechat_qrcode']}" width="100%">
+    {/if}
+</body>
+</html>
